@@ -2,7 +2,7 @@
 json-server --watch database/users.json --port 3001
 ###
 json-server --watch database/interests.json --port 3002
-then yarn start
+### yarn start
 
 And begain testing app 
 Thank You
