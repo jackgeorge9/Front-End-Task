@@ -1,5 +1,6 @@
 import React, { useEffect, useState, FC } from 'react';
-import { Button } from "react-bootstrap";
+import { DeleteBtn } from './DeleteBtn';
+import Interests from './Interests';
 
 
 interface User {
@@ -76,26 +77,32 @@ export const Users: FC<User> = (props) => {
       <div className="my-3 p-3 bg-white rounded shadow-sm">
         <h6 className="border-bottom border-gray pb-2 mb-0">Users</h6>
         {users.map(user =>
-          <div key={user.id} className="media text-muted pt-3">
-            {/* use the follower object key to display data with less code lines */}
-            <span className="badge bg-secondary mx-20">{followersCount[user.id]}</span>
+          <div key={user.id} className="media text-muted pt-3 shadow-sm p-3 mb-5 bg-body rounded">
+
             {/*  */}
             <div className="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+              {/* use the follower object key to display data with less code lines */}
+              <span className="badge bg-secondary mx-20">{followersCount[user.id]}</span>
               <div className="d-flex justify-content-between align-items-center w-100">
                 <strong className="text-gray-dark">{user.name}</strong>
-                <Button variant="danger" onClick={() => onDeleteUser(user.id)}>Delete</Button>
+                {/* Delete Button Component */}
+                <DeleteBtn onDelete={() => onDeleteUser(user.id)} />
               </div>
+
+
               {/* checking what interest that user have and display it */}
               {user.interests ? (user.interests.length > 0 ? user.interests.map(i => {
                 // eslint-disable-next-line
                 return interests?.map(interest => {
                   if (interest.id === i) {
                     return <span key={interest.id}
-                      onClick={() => onDeleteInterest(interest.id, user.id)} className="badge bg-info me-1">{interest.name}</span>
+                      className="badge bg-primary me-1">
+                      {interest.name} <button onClick={() => onDeleteInterest(interest.id, user.id)} type="button" className="btn-close btn-close-white" aria-label="Close"></button> </span>
                   }
                 })
 
               }) : <span className="badge bg-secondary mx-20">No interest</span>) : <span className="badge bg-secondary mx-20">No interest</span>}
+
             </div>
           </div>
         )}
