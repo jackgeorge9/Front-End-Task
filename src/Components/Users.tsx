@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState, FC } from 'react';
 import { Accordion, Card, Row, Col, Button, ButtonGroup } from 'react-bootstrap';
 import { User, Interest } from './Interfaces';
-import NoUsersImage from "../assets/undraw_empty_street_sfxm.svg";
 
 export const Users: FC<User> = (props) => {
 
@@ -70,21 +69,10 @@ export const Users: FC<User> = (props) => {
             <Button variant="primary" onClick={() => setViewList(4)} > <i className="fa fa-th"></i> </Button>
           </ButtonGroup>
         </div>
-        <div>
-          {!users.length ?
-            <>
-              <div className='text-center'>
-                <img src={NoUsersImage} alt="no users" width="400px" />
-                <br />
-                <h6 className="mt-4">There is no users </h6>
-              </div>
-            </> : null
-          }
-        </div>
         <Row>
           {users.map(user =>
-            <Col md={viewList}>
-              <Card key={user.id} className="mb-4 shadow rounded">
+            <Col key={user.id} md={viewList}>
+              <Card className="mb-4 shadow rounded">
                 <Card.Header>
                   <div className='d-flex justify-content-between align-items-center'>
                     <div>
@@ -98,7 +86,7 @@ export const Users: FC<User> = (props) => {
                   <div>
                     <Accordion defaultActiveKey="0">
                       <Card>
-                        <Accordion.Toggle as={Card.Header} eventKey={`${user.id}`} elementType="<a>" style={{ cursor: 'pointer' }}>
+                        <Accordion.Toggle as={Card.Header} eventKey={`${user.id}`} style={{ cursor: 'pointer' }}>
                           <i className="fa fa-eye"></i> view interests
                     </Accordion.Toggle>
                         <Accordion.Collapse eventKey={`${user.id}`}>
