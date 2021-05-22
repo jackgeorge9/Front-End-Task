@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/js/bootstrap.min.js";
 import './App.css';
 import { BrowserRouter,  Route } from "react-router-dom";
-import { Users } from './Components/Users';
+import { Users } from '../Components/Users';
 function App() {
   return (
     <BrowserRouter>
