@@ -62,7 +62,6 @@ export const Users: FC<User> = (props) => {
   return (
     <main role="main" className="container">
       <div className="my-3 p-3 bg-white rounded shadow-sm">
-
         <div className='d-flex justify-content-between align-items-center mb-4 border-bottom pb-2'>
           <h3 className="mb-0">List of users</h3>
           <ButtonGroup aria-label="Basic example" size="sm">
@@ -72,70 +71,59 @@ export const Users: FC<User> = (props) => {
           </ButtonGroup>
         </div>
         <div>
-          {!users.length ? 
-          <>
-            <div className='text-center'>
-            <img src={NoUsersImage} alt="no users" width="400px" />
-            <br />
-            <h6 className="mt-4">There is no users </h6>
-            </div>
-          </>:null  
-        } 
+          {!users.length ?
+            <>
+              <div className='text-center'>
+                <img src={NoUsersImage} alt="no users" width="400px" />
+                <br />
+                <h6 className="mt-4">There is no users </h6>
+              </div>
+            </> : null
+          }
         </div>
         <Row>
           {users.map(user =>
             <Col md={viewList}>
-              
-                {/*  */}
-                <Card key={user.id} className="mb-4 shadow rounded">
-                  <Card.Header>
-                    <div className='d-flex justify-content-between align-items-center'>
-                      <div>
-                        <h5 className='mb-0'> <i className="fa fa-user"></i> {user.name} </h5>
-                        <span className="badge bg-secondary"> <i className="fa fa-users"></i> {followersCount[user.id]}</span>
-                      </div>
-                      <Button variant="danger" size="sm" className='rounded' onClick={() => onDeleteUser(user.id)}> <i className="fa fa-times-circle"></i> </Button>
-                    </div>
-                  </Card.Header>
-                  <Card.Body>
+              <Card key={user.id} className="mb-4 shadow rounded">
+                <Card.Header>
+                  <div className='d-flex justify-content-between align-items-center'>
                     <div>
-                      <Accordion defaultActiveKey="0">
-                        <Card>
-                          <Accordion.Toggle as={Card.Header} eventKey={`${user.id}`} elementType="<a>" style={{ cursor: 'pointer' }}>
-                            <i className="fa fa-eye"></i> view interests
-                    </Accordion.Toggle>
-                          <Accordion.Collapse eventKey={`${user.id}`}>
-                            <Card.Body>
-                              {user.interests ? (user.interests.length > 0 ? user.interests.map(i => {
-                                // eslint-disable-next-line
-                                return interests?.map(interest => {
-                                  if (interest.id === i) {
-                                    return <span key={interest.id}
-                                      className="badge bg-primary me-1">
-                                      {interest.name} <button onClick={() => onDeleteInterest(interest.id, user.id)} type="button" className="btn-close btn-close-white" aria-label="Close"></button> </span>
-                                  }
-                                })
-
-                              }) : <span className="badge bg-secondary mx-20">No interest</span>) : <span className="badge bg-secondary mx-20">No interest</span>}
-                            </Card.Body>
-                          </Accordion.Collapse>
-                        </Card>
-                      </Accordion>
-
-
-
+                      <h5 className='mb-0'> <i className="fa fa-user"></i> {user.name} </h5>
+                      <span className="badge bg-secondary"> <i className="fa fa-users"></i> {followersCount[user.id]}</span>
                     </div>
-                  </Card.Body>
-                </Card>
-
-
+                    <Button variant="danger" size="sm" className='rounded' onClick={() => onDeleteUser(user.id)}> <i className="fa fa-times-circle"></i> </Button>
+                  </div>
+                </Card.Header>
+                <Card.Body>
+                  <div>
+                    <Accordion defaultActiveKey="0">
+                      <Card>
+                        <Accordion.Toggle as={Card.Header} eventKey={`${user.id}`} elementType="<a>" style={{ cursor: 'pointer' }}>
+                          <i className="fa fa-eye"></i> view interests
+                    </Accordion.Toggle>
+                        <Accordion.Collapse eventKey={`${user.id}`}>
+                          <Card.Body>
+                            {user.interests ? (user.interests.length > 0 ? user.interests.map(i => {
+                              // eslint-disable-next-line
+                              return interests?.map(interest => {
+                                if (interest.id === i) {
+                                  return <span key={interest.id}
+                                    className="badge bg-primary me-1">
+                                    {interest.name} <button onClick={() => onDeleteInterest(interest.id, user.id)} type="button" className="btn-close btn-close-white" aria-label="Close"></button> </span>
+                                }
+                              })
+                            }) : <span className="badge bg-secondary mx-20">No interest</span>) : <span className="badge bg-secondary mx-20">No interest</span>}
+                          </Card.Body>
+                        </Accordion.Collapse>
+                      </Card>
+                    </Accordion>
+                  </div>
+                </Card.Body>
+              </Card>
             </Col>
-
           )}
-
         </Row>
       </div>
-
     </main>
   );
 }
